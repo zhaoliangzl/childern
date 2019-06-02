@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Document Meta
+        ============================================= -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--IE Compatibility Meta-->
+    <meta name="author" content="zytheme" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="construction html5 template">
+
+
+    <!-- Fonts
+        ============================================= -->
+    <link href='/cssf/0d05e8074e3347fcba02055a30c23cde.css' rel='stylesheet' type='text/css'>
+
+    <!-- Stylesheets
+        ============================================= -->
+    <link href="cssf/external.css" rel="stylesheet">
+    <link href="cssf/bootstrap.min.css" rel="stylesheet">
+    <link href="cssf/style.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+    <script src="jsf/html5shiv.js"></script>
+    <script src="jsf/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Document Title
+        ============================================= -->
+    <title>儿童旅行社网站-毕业设计</title>
+</head>
+<body>
+
+
+
+<!-- Document Wrapper
+	============================================= -->
+<div id="wrapper" class="wrapper clearfix" >
+    <header id="navbar-spy" class="header header-1" th:fragment="copyheader">
+
+        <!-- .top-bar end -->
+        <nav id="primary-menu" class="navbar navbar-fixed-top">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="logo" href="/">
+                        <img src="picture/logo-light.png" alt="Autoshop">
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse pull-right" id="header-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-left">
+                        <li th:if="${index} == 1" class=" active">
+                            <a href="/" >首页</a>
+                        </li>
+                        <li th:if="${index} != 1" class="">
+                            <a href="/" >首页</a>
+                        </li>
+                        <!-- li end -->
+                        <li  th:if="${index} == 2" class=" active">
+                            <a href="/goods">旅游产品</a>
+                        </li>
+                        <li  th:if="${index} != 2" class="">
+                            <a href="/goods">旅游产品</a>
+                        </li>
+
+                        <li  th:if="${index} == 3" class=" active">
+                            <a href="/lines">旅游路线</a>
+                        </li>
+                        <li  th:if="${index} != 3" class="">
+                            <a href="/lines">旅游路线</a>
+                        </li>
+
+                        <li  th:if="${index} == 4" class=" active">
+                            <a href="/guides">导游团队</a>
+                        </li>
+                        <li  th:if="${index} != 4" class="">
+                            <a href="/guides">导游团队</a>
+                        </li>
+
+                        <li  th:if="${index} == 5" class=" active">
+                            <a href="/about">关于我们</a>
+                        </li>
+                        <li  th:if="${index} != 5" class="">
+                            <a href="/about">关于我们</a>
+                        </li>
+                        <li  th:if="${index} == 6" class=" active">
+                            <a th:if="${user ==0 }" href="/userlogin/login">登陆/注册</a>
+                            <a th:if="${user !=0 }" href="/me">个人中心</a>
+                        </li>
+                        <li  th:if="${index} != 6" class="">
+                            <a th:if="${user ==0 }" href="/userlogin/login">登陆/注册</a>
+                            <a th:if="${user !=0 }" href="/me">个人中心</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+    </header>
+
+    <!-- Hero #1
+============================================= -->
+    <section id="hero" class="hero">
+        <div id="hero-slider" class="hero-slider">
+
+            <!-- Slide #1 -->
+            <div class="slide bg-overlay" th:each="banner,iterStat:${banners}">
+                <div class="bg-section">
+                    <img th:src="${banner.content}" alt="Background"/>
+                </div>
+                <div class="container vertical-center">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
+                            <div class="slide-content">
+                                <div class="slide-icon">
+                                    <!--<i class="icon icon-Settings"></i>-->
+                                </div>
+                                <div class="slide-heading">  </div>
+                                <div class="slide-title">
+                                    <h2 th:text="${banner.title}"></h2>
+
+                                    <!--Say Hello To <span class="color-theme">Car Shop !</span>-->
+                                </div>
+                                <div class="slide-desc"> </div>
+                                <!--<div class="slide-action">-->
+                                    <!--&lt;!&ndash;<a class="btn btn-primary" href="#">Check It Now</a>&ndash;&gt;-->
+                                    <!--&lt;!&ndash;<a class="btn btn-primary btn-white" href="#">Purchase Now</a>&ndash;&gt;-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+                        <!-- .col-md-12 end -->
+                    </div>
+                    <!-- .row end -->
+                </div>
+                <!-- .container end -->
+            </div>
+            <!-- .slide end -->
+        </div>
+        <!-- #hero-slider end -->
+    </section>
+    <!-- #hero -->
+    <!-- New Items
+   ============================================= -->
+    <section id="newItems" class="shop">
+        <div class="container heading">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <p class="subheading">we get</p>
+                    <h2>旅游产品</h2>
+                </div>
+                <!-- .col-md-12 end -->
+            </div>
+            <!-- .row end -->
+
+        </div>
+        <!-- .container end -->
+        <div class="container">
+            <div class="row product-carousel text-center">
+                <!-- Product #1 -->
+
+                <div class="product" th:each="good,iterStat:${goods}">
+                    <div class="product-img">
+                        <img  th:src="${good.banners}" alt="Product" style="width:345px;height: 187px;"/>
+                        <div class="product-hover">
+                            <div class="product-action">
+                                <a class="btn btn-primary" href="javascript:void(0)" th:text="${good.beginTime}"></a>
+                                <a class="btn btn-primary" href="javascript:void(0)" th:text="${good.endTime}"></a>
+                            </div>
+                        </div>
+                        <!-- .product-overlay end -->
+                    </div>
+                    <!-- .product-img end -->
+                    <div class="product-bio">
+                        <div class="prodcut-cat">
+                            <a href="#"></a>
+                        </div>
+                        <!-- .product-cat end -->
+                        <div class="prodcut-title">
+                            <h3>
+                                <a th:href="'/good?id='+${good.id}" th:text="${good.name}"></a>
+                            </h3>
+                        </div>
+                        <!-- .product-title end -->
+                        <div class="product-price">
+                            <span class="symbole"></span><span>点击标题即可报名</span>
+                        </div>
+                        <!-- .product-price end -->
+
+                    </div>
+                    <!-- .product-bio end -->
+                </div>
+
+                <!-- .product end -->
+
+            </div>
+            <!-- .row end -->
+        </div>
+        <!-- .container end -->
+    </section>
+    <!-- #newItems end -->
+    <!-- Clients
+============================================= -->
+    <section id="clients" class="clients bg-gray">
+        <div class="container heading">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <p class="subheading">Awesome</p>
+                    <h2>优秀导游</h2>
+                </div>
+                <!-- .col-md-12 end -->
+            </div>
+            <!-- .row end -->
+
+            <div class="row heading-desc">
+                <div class="col-xs-12 col-sm-12 col-md-10">
+                    <p>我们的导游经过精心培训，能够让您和孩子体验最美好的旅行。</p>
+                </div>
+                <!-- .col-md-10 end -->
+                <div class="col-xs-12 col-sm-12 col-md-2">
+                    <a class="btn btn-primary btn-block" href="/guides">查看所有导游</a>
+                </div>
+                <!-- .client end -->
+            </div>
+            <!-- .row end -->
+
+        </div>
+        <!-- .container end -->
+        <div class="container">
+            <div class="clients-bg">
+                <div class="row">
+                    <div class="col-xs-12 colsm-12 col-md-12 client-carousel">
+                        <!-- Client #1 -->
+                        <div class="client" th:each="guide,iterStat:${guides}">
+                            <img th:src="${guide.header}" alt="client" style="width: 50px;height: 50px;"><a th:href="'/guide?id='+${guide.id}" th:text="${guide.name}"></a>
+                        </div>
+                        <!-- .client end -->
+                    </div>
+                </div>
+                <!-- .row end -->
+            </div>
+        </div>
+        <!-- .container end -->
+    </section>
+    <!-- #clients end -->
+
+
+
+    <!-- Footer #2
+============================================= -->
+    <footer id="footer" class="footer footer-2" th:fragment="copyfooter">
+
+        <!-- Footer Bar
+    ============================================= -->
+        <div class="footer-bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="powered">
+                            <p> 毕业设计
+
+                            </p>
+                            <ul class="list-inline mb-0">
+                                <li>
+                                    <a href="javascript:void(0)">儿童旅行社网站</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">在线预定</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">王书敏</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">&</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">田佳敏</a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">V2.0</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="payment-methods text-right">
+                            <ul class="list-inline mb-0">
+                                <!--<li><img src="picture/visa.png" alt="payment"></li>-->
+                                <!--<li><img src="picture/mastercard.png" alt="payment"></li>-->
+                                <!--<li><img src="picture/american-express.png" alt="payment"></li>-->
+                                <!--<li><img src="picture/delta.png" alt="payment"></li>-->
+                                <!--<li><img src="picture/cirrus.png" alt="payment"></li>-->
+                                <!--<li><img src="picture/paypal.png" alt="payment"></li>-->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- .container end -->
+        </div>
+        <!-- .footer-copyright end -->
+    </footer>
+</div>
+<!-- #wrapper end -->
+
+<!-- Footer Scripts
+============================================= -->
+<script src="jsf/jquery-2.2.4.min.js"></script>
+<script src="jsf/plugins.js"></script>
+<script src="jsf/functions.js"></script>
+</body>
+</html>

@@ -1,0 +1,428 @@
+﻿﻿<!DOCTYPE html>
+<html dir="ltr" lang="en-US" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<!-- Document Meta
+    ============================================= -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--IE Compatibility Meta-->
+<meta name="author" content="zytheme" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="construction html5 template">
+<link href="assets/images/favicon/favicon.ico" rel="icon">
+
+<!-- Fonts
+    ============================================= -->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i%7CRaleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i%7CUbuntu:300,300i,400,400i,500,500i,700,700i' rel='stylesheet' type='text/css'>
+
+<!-- Stylesheets
+    ============================================= -->
+<link href="../cssf/external.css" rel="stylesheet">
+<link href="../cssf/bootstrap.min.css" rel="stylesheet">
+<link href="../cssf/style.css" rel="stylesheet">
+
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+<!--[if lt IE 9]>
+      <script src="../jsf/html5shiv.js"></script>
+      <script src="../jsf/respond.min.js"></script>
+    <![endif]-->
+
+<!-- Document Title
+    ============================================= -->
+	<title>儿童旅行社网站-毕业设计</title>
+	<style>
+		.address{
+			width: 300px;
+			height: 100px;
+			/*background-color: #0b0b0b;*/
+			display: inline;
+		}
+		.xss{
+			display: flex;
+		}
+		.circular{
+			width: 100px;
+			height: 100px;
+			border-radius:50%;
+			background-color: #00a0e9;
+		}
+		.text{
+			font-family: "Microsoft Yahei", "Hiragino Sans GB", "Helvetica Neue", Helvetica, tahoma, arial, Verdana, sans-serif, "WenQuanYi Micro Hei", "\5B8B\4F53";
+		}
+		.hang{
+			width: 200px;
+			height: 3px;
+			background-color: #00a0e9;
+			float: right;
+			margin-top: -15%;
+		}
+		#desc img{
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+	<script>
+		function addToCart() {
+			if(flag == 1){
+				alert("报名已经截至")
+			}
+			if(flag == 2){
+				alert("报名还没有开始")
+			}
+			if(flag == 0){
+				//携带参数去请求
+				window.location.href = "/cart?id="+$("#idx").val();
+
+			}
+		}
+	</script>
+</head>
+<body>
+
+<!-- Document Wrapper
+	============================================= -->
+<div id="wrapper" class="wrapper clearfix">
+	<header id="navbar-spy" class="header header-1" th:include="user/index/index::copyheader">
+	</header>
+	
+	<!-- Page Title
+============================================= -->
+	<section id="page-title" class="page-title">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-6">
+					<h1>旅游产品详情</h1>
+				</div>
+			</div>
+			<!-- .row end -->
+		</div>
+		<!-- .container end -->
+	</section>
+	<!-- #page-title end -->
+	
+	<!-- Shop Single right sidebar
+============================================= -->
+	<section id="shopgrid" class="shop shop-single">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-9 shop-content" style="width: 100%">
+					<input th:value="${good.id}" id="idx" type="hidden">
+
+					
+					<!-- Product Image -->
+					<div class="product-img product-feature-img mb-50">
+						<img th:src="${good.banners}" alt="product"/>
+					</div>
+					<!-- .product-img end -->
+					
+					<!-- Product Content -->
+					<div class="product-content">
+						<div class="product-title text-center-xs">
+							<h3 th:text="${good.name}"></h3>
+						</div>
+						<!-- .product-img end -->
+						
+						<div class="product-meta mb-30">
+							<div class="product-price pull-left pull-none-xs">
+								<p>
+									报名日期：<span th:text="${good.beginTime}" id="beg"></span>至<span th:text="${good.endTime}" id="end"></span>
+								</p>
+							</div>
+
+							<!-- .product-price end -->
+							<div class="product-review text-right text-center-xs">
+								<span class="product-rating" th:if="${avg} <= 1">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+									</span>
+								<span>
+								<span class="product-rating" th:if="${avg} > 1 and ${avg} < 2">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star-half-o"></i>
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+								</span>
+								<span class="product-rating" th:if="${avg} >= 2 and ${avg} < 3">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star-half-o"></i>
+									<i class="fa fa-star-o"></i>
+									<i class="fa fa-star-o"></i>
+								</span>
+								<span class="product-rating" th:if="${avg} >= 3 and ${avg} < 4">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star-half-o"></i>
+									<i class="fa fa-star-o"></i>
+								</span>
+								<span class="product-rating" th:if="${avg} >= 4 and ${avg} < 5">
+									f<i class="a fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star-half-o"></i>
+								</span>
+								<span class="product-rating" th:if="${avg} >=5">
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+								</span>
+								<span th:text="${commentNum}"></span>条评论</span>
+
+							</div>
+							<!--- .product-review end -->
+						</div>
+						<!-- .product-img end -->
+						
+						<div class="product-desc text-center-xs xss" >
+
+							<div class="address" th:each="lin,iterStat:${lines}">
+								<div class="circular" >
+									<img style="width: 100%;height: 100%;border-radius: 50%;" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2867942743,1916751184&fm=26&gp=0.jpg"/>
+								</div>
+								<div class="hang" th:if="${iterStat.index} lt ${lineslength}-1"></div>
+								<span class="text"  th:text="${lin}"></span>
+							</div>
+
+						</div>
+
+						<hr class="mt-30 mb-30">
+						<div class="product-action">
+
+							<div class="product-cta text-right text-center-xs">
+								<span>报名倒计时：<span id="dao"></span></span>
+								<a class="btn btn-primary" onclick="addToCart()">添加到购物车</a>
+
+							</div>
+						</div>
+						<!-- .product-action end -->
+						<hr class="mt-30 mb-30">
+						<!-- .product-share end -->
+						<div class="product-tabs">
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs" role="tablist">
+								<li role="presentation" class="active">
+									<a href="#description" aria-controls="description" role="tab" data-toggle="tab">产品详情</a>
+								</li>
+								<li role="presentation">
+									<a href="#details" aria-controls="details" role="tab" data-toggle="tab">路线详情</a>
+								</li>
+								<li role="presentation">
+									<a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">评论(<span th:text="${commentNum}"></span>)</a>
+								</li>
+							</ul>
+							
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div role="tabpanel" class="tab-pane active" id="description">
+									<div th:utext="${good.description}" id="desc"></div>
+								</div>
+								<!-- #description end -->
+								<div role="tabpanel" class="tab-pane" id="details">
+									<div  th:text="${line.line}"> </div>
+									<div  th:utext="${line.description}"> </div>
+								</div>
+								<!-- #details end -->
+								<div role="tabpanel" class="tab-pane reviews" id="reviews">
+									<ul class="product-review list-unstyled">
+
+										<li class="review-comment" th:each="comment:${comments}">
+											<h6>匿名网友</h6>
+											<p class="review-date" th:text="${comment.time}"></p>
+											<div class="product-rating" th:if="${comment.score} == 1">
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star-half-o"></i>
+												<i class="fa fa-star-half-o"></i>
+												<i class="fa fa-star-half-o"></i>
+												<i class="fa fa-star-half-o"></i>
+											</div>
+											<div class="product-rating" th:if="${comment.score} == 2">
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star-half-o"></i>
+												<i class="fa fa-star-half-o"></i>
+												<i class="fa fa-star-half-o"></i>
+											</div>
+											<div class="product-rating" th:if="${comment.score} == 3">
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star-half-o"></i>
+												<i class="fa fa-star-half-o"></i>
+											</div>
+											<div class="product-rating" th:if="${comment.score} == 4">
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star-half-o"></i>
+											</div>
+											<div class="product-rating" th:if="${comment.score} == 5">
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+											</div>
+											<div class="product-comment">
+												<p th:text="${comment.content}"></p>
+											</div>
+										</li>
+										<!-- .review-comment end -->
+										<!-- .review-comment end -->
+									</ul>
+
+								</div>
+								<!-- #reviews end -->
+							</div>
+							<!-- #tab-content end -->
+						</div>
+						<!-- .product-tabs end -->
+					</div>
+					<!-- .product-content -->
+					
+					<!-- Related Project -->
+					<div class="row" style="margin-top: 20px;">
+						<div class="col-xs-12 col-sm-12 col-md-12">
+							<div class="widget-related-product">
+								<div class="widget-title">
+									<h4>本次导游</h4>
+								</div>
+								<div class="widget-content">
+									<div class="row">
+										<!-- Product #1 -->
+										<div class="col-xs-12 col-sm-6 col-md-4 product" th:each="guide,iterStat:${guides}">
+											<div class="product-img" >
+												<img  th:src="${guide.header}" alt="Product"/>
+											</div>
+											<!-- .product-img end -->
+											<div class="product-bio">
+												<!--<div class="prodcut-cat">-->
+													<!--<a href="#">Opel</a>-->
+												<!--</div>-->
+												<!-- .product-cat end -->
+												<div class="prodcut-title">
+													<h3>
+														<a th:href="'/guide?id='+${guide.id}" th:text="${guide.name}"></a>
+													</h3>
+												</div>
+												
+											</div>
+											<!-- .product-bio end -->
+										</div>
+										<!-- .product end -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- .product-related end -->
+				</div>
+				<!-- .shop-content end -->
+
+				<!-- .col-md-3 end -->
+			</div>
+			<!-- .row end -->
+		</div>
+		<!-- .container end -->
+	</section>
+	<!-- #blog end -->
+	
+	<!-- Footer #1
+============================================= -->
+	<footer id="footer" class="footer footer-1" th:include="/user/index/index::copyfooter">
+	</footer>
+</div>
+<!-- #wrapper end -->
+
+<!-- Footer Scripts
+============================================= -->
+<script src="../jsf/jquery-2.2.4.min.js"></script>
+<script src="../jsf/plugins.js"></script>
+<script src="../jsf/functions.js"></script>
+
+<script language='javascript' th:inline="javascript">
+	var flag = 0;
+	/*<![CDATA[*/
+	$(function () {
+		console.log("sss")
+		console.log($("#beg").html());
+		console.log($("#end").html());
+		var x= getDate2();
+		if(x<0){
+			//证明可以开始了
+			var s = getDate();
+			if(s>0){
+				setInterval(getDate, 1000);
+			}else{
+				flag = 1;
+				$("#dao").html("已过截至日期");
+			}
+		}else{
+			flag = 2;
+			$("#dao").html("报名还没有开始");
+		}
+
+	})
+
+
+	//var oSpan = document.getElementsByTagName('span')[0];
+	function tow(n) {
+		return n >= 0 && n < 10 ? '0' + n : '' + n;
+	}
+	function getDate() {
+		var oDate = new Date();//获取日期对象
+		var oldTime = oDate.getTime();//现在距离1970年的毫秒数
+		var newDate = new Date($("#end").html());
+		var newTime = newDate.getTime();//2019年距离1970年的毫秒数
+		var second = Math.floor((newTime - oldTime) / 1000);//未来时间距离现在的秒数
+		var day = Math.floor(second / 86400);//整数部分代表的是天；一天有24*60*60=86400秒 ；
+		second = second % 86400;//余数代表剩下的秒数；
+		var hour = Math.floor(second / 3600);//整数部分代表小时；
+		second %= 3600; //余数代表 剩下的秒数；
+		var minute = Math.floor(second / 60);
+		second %= 60;
+		var str = tow(day) + '天'
+				+ tow(hour) + '小时'
+				+ tow(minute) + '分钟'
+				+ tow(second) + '秒';
+		$("#dao").html(str);
+		return second;
+		// oSpan.innerHTML = str;
+	}
+
+	function getDate2() {
+		var oDate = new Date();//获取日期对象
+		var oldTime = oDate.getTime();//现在距离1970年的毫秒数
+		var newDate = new Date($("#beg").html());
+		var newTime = newDate.getTime();//2019年距离1970年的毫秒数
+		var second = Math.floor((newTime - oldTime) / 1000);//未来时间距离现在的秒数
+		var day = Math.floor(second / 86400);//整数部分代表的是天；一天有24*60*60=86400秒 ；
+		second = second % 86400;//余数代表剩下的秒数；
+		var hour = Math.floor(second / 3600);//整数部分代表小时；
+		second %= 3600; //余数代表 剩下的秒数；
+		var minute = Math.floor(second / 60);
+		second %= 60;
+		var str = tow(day) + '天'
+				+ tow(hour) + '小时'
+				+ tow(minute) + '分钟'
+				+ tow(second) + '秒';
+		console.log(str)
+		$("#dao").html(str);
+		return second;
+		// oSpan.innerHTML = str;
+	}
+
+	// setInterval(getDate, 1000);
+	/*]]>*/
+</script>
+</body>
+</html>

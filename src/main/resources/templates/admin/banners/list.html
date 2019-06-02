@@ -1,0 +1,196 @@
+﻿<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="Bookmark" href="../favicon.ico" />
+<link rel="Shortcut Icon" href="../favicon.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="../lib/html5shiv.js"></script>
+<script type="text/javascript" src="../lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="../static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="../static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="../lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="../static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="../static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="../lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>轮播图列表</title>
+
+	<style>
+
+	</style>
+</head>
+<body>
+
+<nav class="breadcrumb">
+	<i class="Hui-iconfont">&#xe67f;</i>
+	首页
+	<span class="c-gray en">&gt;</span>
+	轮播图管理
+	<span class="c-gray en">&gt;</span>
+	轮播图列表
+	<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" >
+		<i class="Hui-iconfont">&#xe68f;</i>
+	</a>
+</nav>
+
+<div class="page-container">
+	<p style="text-align: center;font-size:20px;font-family: KaiTi;" class="">轮播图信息管理</p>
+	<div class="cl pd-5 bg-1 bk-gray mt-20">
+		<span class="l">
+
+			<a href="javascript:;" onclick="banner_add('添加轮播图','/adbannersadmin/add','900','600')" class="btn btn-primary radius">
+				<i class="Hui-iconfont">&#xe600;</i> 添加轮播图
+			</a>
+		</span>
+
+		<span class="r">共有数据：<strong id="sum"></strong> 条</span>
+	</div>
+	<table class="table table-border table-bordered table-bg">
+		<thead>
+			<tr>
+				<th scope="col" colspan="9">轮播图列表</th>
+			</tr>
+			<tr class="text-c">
+				<th width="25"><input type="checkbox" name="" value=""/></th>
+				<th width="40">ID</th>
+				<th width="150">标题</th>
+				<th width="80">图片链接</th>
+				<th width="100">启动/关闭</th>
+				<th width="100">操作</th>
+			</tr>
+		</thead>
+		<tbody id="list">
+		</tbody>
+	</table>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="../lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="../static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="../lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="../lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../lib/laypage/1.2/laypage.js"></script>
+
+<script th:inline="javascript">
+    //获取后台传来的idzhi
+
+
+	var banner_id;
+    //console.log(id);
+    $(function () {
+        //页面初始化函数
+
+        banner_id=[[${banner}]];
+
+        var list = [[${list}]];
+
+        console.log(list)
+
+        var listCon = $("#list");
+
+        $("#sum").text(list.length);
+
+        $.each(list,function (i) {
+
+            var html = '<tr class="text-c">';
+            html+='<td><input type="checkbox" value="1" name=""/></td>';
+            html+='<td>'+list[i].id+'</td>';
+            html+='<td>'+list[i].title+'</td>';
+			var s = list[i].content == null? "http://img.photo.163.com/6-woxecPz1aBq_csvd10Rw==/2834453015476316347.jpg":list[i].content;
+			html+='<td><img style="width: 100px;height: 100px;" src = "'+s+'" /></td>';
+			html+='<td>'+list[i].enable+'</td>';
+			//
+			// html+='<td>'+list[i].phone+'</td>';
+			// html+='<td>'+list[i].brief+'</td>';
+			// if(list[i].classname == null){
+            //     html+='<td>暂未指定，请指定</td>';
+			// }else{
+            //     html+='<td>'+list[i].classname+'</td>';
+			// }
+
+
+			html+='<td class="td-manage"><a title="编辑" href="javascript:;" onclick="banner_edit(\'轮播图信息编辑\',\'/adbannersadmin/update?id='+list[i].id+'\',\'1\',\'800\',\'500\')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a><a title="删除" href="javascript:;" onclick="banner_del(this,\''+list[i].id+'\')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>';
+
+			html+='';
+			html+='</tr>';
+
+			listCon.append(html);
+        })
+    });
+
+</script>
+
+<script type="text/javascript">
+
+    /*<![CDATA[*/
+/*
+	参数解释：
+	title	标题
+	url		请求的url
+	id		需要操作的数据id
+	w		弹出层宽度（缺省调默认值）
+	h		弹出层高度（缺省调默认值）
+*/
+
+
+
+
+
+
+/*管理员-增加*/
+function banner_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+/*管理员修改密码*/
+
+function banner_change_pass(url,id){
+
+    console.log(url);
+    layer_show("修改密码",url+"?id="+id,400,300);
+}
+/*管理员-删除*/
+function banner_del(obj,id){
+	layer.confirm('确认要删除吗？',function(index){
+		$.ajax({
+			type: 'GET',
+			url: '/adbannersservice/del',
+			data:{
+				id:id
+			},
+			dataType: 'json',
+			success: function(data){
+				if(data.errorCode == 200){
+                    $(obj).parents("tr").remove();
+                    layer.msg('已删除!',{icon:1,time:1000});
+				}else{
+                    layer.msg(data.errorMessage,{icon:2,time:1000});
+				}
+			},
+			error:function(data) {
+				console.log(data.msg);
+			},
+		});		
+	});
+}
+
+/*管理员-编辑*/
+function banner_edit(title,url,id,w,h){
+	layer_show(title,url,w,h);
+}
+
+    /*]]>*/
+</script>
+</body>
+</html>

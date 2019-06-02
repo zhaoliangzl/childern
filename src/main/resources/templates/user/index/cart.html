@@ -1,0 +1,285 @@
+﻿﻿<!DOCTYPE html>
+<html dir="ltr" lang="en-US" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Document Meta
+        ============================================= -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--IE Compatibility Meta-->
+    <meta name="author" content="zytheme"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="construction html5 template">
+    <!-- Fonts
+        ============================================= -->
+    <!-- Stylesheets
+        ============================================= -->
+    <link href="cssf/external.css" rel="stylesheet">
+    <link href="cssf/bootstrap.min.css" rel="stylesheet">
+    <link href="cssf/style.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+    <script src="jsf/html5shiv.js"></script>
+    <script src="jsf/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Document Title
+        ============================================= -->
+    <title>儿童旅行社网站-毕业设计</title>
+    <script>
+        var peoNum = 0;
+        function peoNumChange(obj) {
+            var l = $(obj).val();
+            var html = "";
+            var adx = $("#adx");
+            adx.empty();
+            for (var i = 0; i < l; i++) {
+                html = "";
+                html += '<div class="col-xs-12 col-md-6">';
+                html += '<i class="fa fa-angle-down"></i>';
+                html += '<select class="form-control" id="type'+i+'">';
+                html += '<option value="0">类型</option>';
+                html += '<option value="1">成人</option>';
+                html += '<option value="2">小孩</option>';
+                html += '</select>';
+                html += '</div>';
+                html += '<div class="col-md-6">';
+                html += '<input type="text" class="form-control" id="name'+i+'" placeholder="姓名">';
+                html += '</div>';
+                html += '<div class="col-md-6">';
+                html += '<input type="number" class="form-control" id="age'+i+'" placeholder="年龄">';
+                html += '</div>';
+                html += '<div class="col-md-6">';
+                html += '<input type="text" class="form-control" id="phone'+i+'" placeholder="联系方式">';
+                html += ' </div>';
+                adx.append(html);
+                console.log("第" + i + "个人");
+            }
+        }
+
+        function  sub() {
+            console.log("ssss")
+            var res = checkContent();
+            if(res){
+                //开始发送数据
+                $.ajax({
+                    type: 'POST',
+                    url: '/order/add',
+                    data:{
+                        goodsid:$("#id").val(),
+                        name:$("#name").val(),
+                        peonum:$("#select").val(),
+                        peostr:res.join("-")
+                    },
+                    dataType: 'json',
+                    success: function(data){
+                        console.log(data)
+                        if(data.resultStatus ){
+                            window.location.href = "/me";
+                        }else{
+                            layer.msg(data.errorMessage, {icon: 2, time: 1000});
+                        }
+                    },
+                    error:function(data) {
+                        layer.msg(data.errorMessage, {icon: 2, time: 1000});
+                    },
+                });
+            }else{
+                //信息没有填写好
+            }
+        }
+
+        function checkContent() {
+            var l = $("#select").val();
+            var res = [];
+            var name = $("#name").val();
+            console.log("11"+name);
+            if(name == ""){
+                layer.msg('请填写订单联系人姓名!', {icon: 2, time: 1000});
+                return false;
+            }
+
+            if(l == 0){
+                layer.msg('至少填写一个人哦!', {icon: 2, time: 1000});
+                return false;
+            }
+
+
+            for (var i = 0; i < l; i++) {
+                var type = $("#type"+i).val();
+                console.log("t"+type)
+                if(type == 0){
+                    layer.msg('请选择成员类型!', {icon: 2, time: 1000});
+                    return false;
+                }
+                var namex = $("#name"+i).val();
+                if(namex == ""){
+                    layer.msg('请填写成员姓名!', {icon: 2, time: 1000});
+                    return false;
+                }
+                var age = $("#age"+i).val();
+                if(age > 0){
+
+                    if((age < 4 || age >14) && type == 2){
+                        layer.msg('请正确填写儿童年龄!', {icon: 2, time: 1000});
+                        return false;
+                    }
+
+                }else{
+                    layer.msg('请正确填写成员年龄!', {icon: 2, time: 1000});
+                    return false;
+                }
+                var phone = $("#phone"+i).val();
+                if(phone == ""){
+                    layer.msg('请填写成员联系方式!', {icon: 2, time: 1000});
+                    return false;
+                }
+                console.log(type+":"+namex+":"+age+":"+phone)
+                res.push(type+":"+namex+":"+age+":"+phone);
+            }
+
+            return res;
+        }
+
+
+    </script>
+</head>
+<body>
+
+
+<!-- Document Wrapper
+	============================================= -->
+<div id="wrapper" class="wrapper clearfix">
+    <header id="navbar-spy" class="header header-1" th:include="user/index/index::copyheader">
+    </header>
+
+    <!-- Page Title
+============================================= -->
+    <section id="page-title" class="page-title">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <h1>订单提交</h1>
+                </div>
+                <!-- .col-md-6 end -->
+                <!-- .col-md-6 end -->
+            </div>
+            <!-- .row end -->
+        </div>
+        <!-- .container end -->
+    </section>
+    <!-- #page-title end -->
+
+    <!-- Shop Cart
+============================================= -->
+    <section id="shopcart" class="shop shop-cart">
+        <input type="hidden" id="id" th:value="${goods.id}">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12  col-sm-12  col-md-12">
+                    <div class="cart-table table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr class="cart-product">
+                                <th class="cart-product-item">旅游产品</th>
+                                <th class="cart-product-price">报名截至时间</th>
+                                <th class="cart-product-quantity">开始时间</th>
+                                <th class="cart-product-total">联系人</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="cart-product">
+                                <td class="cart-product-item">
+                                    <!--<div class="cart-product-remove">-->
+                                    <!--<i class="fa fa-close"></i>-->
+                                    <!--</div>-->
+                                    <div class="cart-product-img">
+                                        <img style="width: 100px;height: 100px;" th:src="${goods.banners}"
+                                             alt="product"/>
+                                    </div>
+                                    <div class="cart-product-name">
+                                        <h6 th:text="${goods.name}"></h6>
+                                    </div>
+                                </td>
+                                <td class="cart-product-price" th:text="${goods.endTime}"></td>
+                                <td class="cart-product-total">
+                                    <div class="product-quantity" th:text="${goods.time}">
+                                    </div>
+                                </td>
+                                <td class="cart-product-total">王经理 188-8888-8888</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- .cart-table end -->
+                </div>
+                <!-- .col-md-12 end -->
+                <div class="col-xs-12  col-sm-12  col-md-6 mb-30-xs mb-30-sm">
+                    <div class="cart-shiping">
+                        <h6>联系方式：</h6>
+                        <div class="row">
+                            <!--<form>-->
+                                <div class="col-xs-12 col-md-12">
+                                    <input type="text" class="form-control" id="name" placeholder="请输入您的姓名">
+                                </div>
+                                <div class="col-xs-12 col-md-12">
+                                    <i class="fa fa-angle-down"></i>
+                                    <select class="form-control" id="select" onchange="peoNumChange(this)">
+                                        <option value="0">请选择您的人数</option>
+                                        <option value="1">1人</option>
+                                        <option value="2">2人</option>
+                                        <option value="3">3人</option>
+                                        <option value="4">4人</option>
+                                    </select>
+                                </div>
+                                <span id="adx">
+								</span>
+
+                                <div class="col-md-12">
+                                    <span>
+                                        注：儿童必须在5-14岁之前。
+                                    </span>
+                                    <button type="button" onclick="sub()" class="btn btn-primary pull-right pull-none-xs">提交订单
+                                    </button>
+                                </div>
+                            <!--</form>-->
+                        </div>
+                    </div>
+                    <!-- .cart-shiping end -->
+                </div>
+                <!-- .col-md-6 end -->
+                <div class="col-xs-12  col-sm-12  col-md-6">
+                    <div class="cart-total-amount">
+                        <h6>订单详情 :</h6>
+                        <ul class="list-unstyled">
+                            <li>产品名称 :<span class="pull-right text-right" th:text="${goods.name}"></span></li>
+                            <li>路线 :<span class="pull-right text-right" th:text="${line.line}"></span></li>
+                            <li>出发时间：<span class="pull-right text-right" th:text="${goods.time}"></span></li>
+                        </ul>
+                    </div>
+                    <!-- .cart-total-amount end -->
+                </div>
+                <!-- .col-md-6 end -->
+            </div>
+            <!-- .row end -->
+        </div>
+        <!-- .container end -->
+    </section>
+    <!-- #shopcart end -->
+
+    <!-- Footer #1
+============================================= -->
+    <footer id="footer" class="footer footer-1" th:include="/user/index/index::copyfooter">
+    </footer>
+</div>
+<!-- #wrapper end -->
+
+<!-- Footer Scripts
+============================================= -->
+<script src="jsf/jquery-2.2.4.min.js"></script>
+<script src="jsf/plugins.js"></script>
+<script src="jsf/functions.js"></script>
+<script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
+</body>
+</html>

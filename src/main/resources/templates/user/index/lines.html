@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- Document Meta
+        ============================================= -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--IE Compatibility Meta-->
+    <meta name="author" content="zytheme" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="construction html5 template">
+    <link href="assets/images/favicon/favicon.ico" rel="icon">
+
+    <!-- Fonts
+        ============================================= -->
+    <link href='/cssf/0d05e8074e3347fcba02055a30c23cde.css' rel='stylesheet' type='text/css'>
+
+    <!-- Stylesheets
+        ============================================= -->
+    <link href="cssf/external.css" rel="stylesheet">
+    <link href="cssf/bootstrap.min.css" rel="stylesheet">
+    <link href="cssf/style.css" rel="stylesheet">
+
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+    <script src="jsf/html5shiv.js"></script>
+    <script src="jsf/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Document Title
+        ============================================= -->
+    <title>旅游线路</title>
+</head>
+<body>
+
+
+
+<!-- Document Wrapper
+	============================================= -->
+<div id="wrapper" class="wrapper clearfix">
+    <header id="navbar-spy" class="header header-1" th:include="user/index/index::copyheader">
+    </header>
+
+    <!-- Page Title
+============================================= -->
+    <section id="page-title" class="page-title">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-8">
+                    <h1>旅游路线</h1>
+                </div>
+            </div>
+            <!-- .row end -->
+        </div>
+        <!-- .container end -->
+    </section>
+    <!-- #page-title end -->
+
+    <!-- FQA Section
+============================================= -->
+    <section id="faqss" class="faqs faqs-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12  col-sm-12  col-md-9" style="width: 100%">
+                    <div class="panel-group accordion" id="accordion02" role="tablist" aria-multiselectable="true">
+
+                        <!-- question #1 -->
+                        <div class="panel" th:each="line,iterStat:${lines}">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title"><i class="fa fa-map-marker"></i>
+                                    <a class="accordion-toggle collapsed" role="button" data-toggle="collapse" data-parent="#accordion02" th:href="'#collapse'+${iterStat.index}" aria-expanded="true" aria-controls="collapse01" th:text="${line.name}"></a>
+                                </h4>
+                            </div>
+                            <div th:id="'collapse'+${iterStat.index}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                <p th:text="${line.line}"></p>
+                                <div class="panel-body" th:utext="${line.description}"></div>
+                            </div>
+                        </div>
+                        <!-- .panel end -->
+
+                        <!-- question #2 -->
+                        <div class="panel" style="height: 0px;padding: 0px;border: 0px;">
+
+                        </div>
+                        <!-- .panel end -->
+                    </div>
+                    <!-- End .Accordion-->
+                </div>
+                <!-- .col-md-8 end -->
+
+                <!-- .col-md-3 end -->
+            </div>
+            <!-- .row end -->
+        </div>
+        <!-- .container end -->
+    </section>
+
+    <!-- Footer #1
+============================================= -->
+    <footer id="footer" class="footer footer-1" th:include="/user/index/index::copyfooter">
+    </footer>
+</div>
+<!-- #wrapper end -->
+
+<!-- Footer Scripts
+============================================= -->
+<script src="jsf/jquery-2.2.4.min.js"></script>
+<script src="jsf/plugins.js"></script>
+<script src="jsf/functions.js"></script>
+</body>
+</html>

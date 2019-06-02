@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="../static/h-ui/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="../lib/Hui-iconfont/1.0.8/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/skin/default/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/css/style.css" />
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        .t-ctn {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .t-ctn .s-ctn {
+            height: 160px;
+            white-space: nowrap;
+            font-size: 0;
+            text-align: center;
+        }
+
+        .t-ctn .s-ctn div {
+            font-size: 14px;
+            box-sizing: border-box;
+            white-space: normal;
+            word-wrap: break-word;
+            word-break: break-all;
+            overflow: hidden;
+            display: inline-block;
+            width: 160px;
+            height: 94%;
+            margin-left: 30px;
+            border-radius: 30px;
+            /*border: 10px solid red;*/
+
+            text-align: center;
+
+
+        }
+        .text{
+            font-family: "Microsoft Yahei", "Hiragino Sans GB", "Helvetica Neue", Helvetica, tahoma, arial, Verdana, sans-serif, "WenQuanYi Micro Hei", "\5B8B\4F53";
+            font-size: 20px;
+            color: white;
+        }
+        .num{
+            font-family: "Microsoft Yahei", "Hiragino Sans GB", "Helvetica Neue", Helvetica, tahoma, arial, Verdana, sans-serif, "WenQuanYi Micro Hei", "\5B8B\4F53";
+            font-size: 30px;
+            color: white;
+        }
+        #d1{
+            background-color: #00a0e9;
+        }
+        #d2{
+            background-color: #FF0000;
+        }
+        #d3{
+            background-color: #42b142;
+        }
+        #d4{
+            background-color: #f89406;
+        }
+        #d5{
+            background-color: #000077;
+        }
+        #d6{
+            background-color: #7d7d7d;
+        }
+         *{
+            margin-left: 0px;
+        }
+    </style>
+
+</head>
+
+
+<body>
+<div class="t-ctn">
+    <div class="s-ctn">
+        <div id="d1">
+            <br>
+            <p class="text">全部订单</p>
+            <br>
+            <p class="num" th:text="${numall}" id="iii"></p>
+
+        </div>
+        <div id="d2">
+            <br>
+            <p class="text">待确认订单</p>
+            <br>
+            <p class="num" th:text="${num1}">1</p>
+        </div>
+        <div id="d3">
+            <br>
+            <p class="text">已确认订单</p>
+            <br>
+            <p class="num" th:text="${num2}">1</p>
+        </div>
+        <div id="d4">
+            <br>
+            <p class="text">待评价订单</p>
+            <br>
+            <p class="num" th:text="${num3}">1</p>
+        </div>
+        <div id="d5">
+            <br>
+            <p class="text">已评价订单</p>
+            <br>
+            <p class="num" th:text="${num4}">1</p>
+        </div>
+        <div id="d6">
+            <br>
+            <p class="text">已取消订单</p>
+            <br>
+            <p class="num" th:text="${num5}">1</p>
+        </div>
+    </div>
+</div>
+<div class="page-container" style="margin-left: 0px;">
+    <div class="f-14 c-error"></div>
+    <div id="container" style="min-width:700px;height:400px;margin-left: 0px;"></div>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="../lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="../static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="../lib/hcharts/Highcharts/5.0.6/js/highcharts.js"></script>
+<script type="text/javascript" src="../lib/hcharts/Highcharts/5.0.6/js/modules/exporting.js"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var dates = [[${datas}]];
+    var numForAll = [[${numForAll}]];
+    var numFor1 =[[${numFor1}]];
+    var numFor2 =[[${numFor2}]];
+    var numFor3 =[[${numFor3}]];
+    var numFor4 =[[${numFor4}]];
+    var numFor5 =[[${numFor5}]];
+
+    /*]]>*/
+</script>
+<script type="text/javascript">
+    // $(function () {
+    //     $("#iii").text("222");
+    // })
+    
+    $(function () {
+        Highcharts.chart('container', {
+            title: {
+                text: '近7天订单情况',
+                x: -20 //center
+            },
+            subtitle: {
+                text: '数据来源：儿童旅行社管理系统',
+                x: -20
+            },
+            xAxis: {
+                categories:dates
+            },
+            yAxis: {
+                title: {
+                    text: '销售数量'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                valueSuffix: '单'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [{
+                name: '全部订单',
+                data: numForAll
+            }, {
+                name: '待确认订单',
+                data: numFor1
+            }, {
+                name: '已确认订单',
+                data: numFor2
+            }, {
+                name: '待评价订单',
+                data: numFor3
+            }, {
+                name: '已评价订单',
+                data: numFor4
+            }, {
+                name: '已取消订单',
+                data: numFor5
+            }]
+        });
+    });
+</script>
+</body>
+</html>

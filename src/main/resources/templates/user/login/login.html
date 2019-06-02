@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="UTF-8">
+<title>精美的CSS3登录注册切换表单页面模板</title>
+
+<link rel="stylesheet" href="/cssl/style.css">
+
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+<link rel='stylesheet prefetch' href='https://fonts.googleapis.com/icon?family=Material+Icons'>
+
+</head>
+<body>
+
+<div class="cotn_principal">
+  <div class="cont_centrar" style="top: 25%;">
+    <div class="cont_login">
+      <div class="cont_info_log_sign_up">
+        <div class="col_md_login">
+          <div class="cont_ba_opcitiy">
+            <h2>登录</h2>
+            <p>登录后，您即可享受网站所有线上服务</p>
+            <button class="btn_login" onClick="cambiar_login()">开始登录</button>
+          </div>
+        </div>
+        <div class="col_md_sign_up">
+          <div class="cont_ba_opcitiy">
+            <h2>注册</h2>
+            <p>注册您的个人信息，方便您登录本网站，使用本网站。</p>
+            <button class="btn_sign_up" onClick="cambiar_sign_up()">开始注册</button>
+          </div>
+        </div>
+      </div>
+      <div class="cont_back_info">
+        <div class="cont_img_back_grey"> <img src="/picture/po.jpg" alt="" /> </div>
+      </div>
+      <div class="cont_forms" >
+        <div class="cont_img_back_"> <img src="/picture/po.jpg" alt="" /> </div>
+        <div class="cont_form_login"> <a href="#" onClick="ocultar_login_sign_up()" ><i class="material-icons">&#xE5C4;</i></a>
+          <h2>登录</h2>
+          <input type="text" id="username" placeholder="账号" />
+          <input type="password"  id="password" placeholder="密码" />
+          <button class="btn_login" onClick="login()">登录</button>
+        </div>
+        <div class="cont_form_sign_up"> <a href="#" onClick="ocultar_login_sign_up()"><i class="material-icons">&#xE5C4;</i></a>
+          <h2>SIGN UP</h2>
+          <input type="text" id="res_username" placeholder="账号" />
+          <input type="text" id="res_name" placeholder="您的姓名" />
+          <input type="password" id="res_password1" placeholder="密码" />
+          <input type="password" id="res_password2" placeholder="确认密码" />
+          <button class="btn_sign_up" onClick="sign_up()">注册</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/lib/layer/2.4/layer.js"></script>
+<script src="/jsl/index.js"></script>
+<script>
+    function sign_up() {
+      var username = $("#res_username").val();
+      var password1 =$("#res_password1").val();
+      var password2 = $("#res_password2").val();
+      var name = $("#res_name").val();
+      if(username == "" ||password1 == ""||name == ""||password2 == ""||password1 != password2){
+          alert("格式错误")
+      } else{
+        //注册
+        $.ajax({
+          type: 'POST',
+          url: '/userloginservice/add',
+          data:{
+            username:username,
+            password:password1,
+            name:name
+          },
+          dataType: 'json',
+          success: function(data){
+            if(data.resultStatus ){
+              alert("注册成功，赶紧登陆吧");
+              window.history.go(-1);
+            }else{
+                alert(data.errorMessage);
+            }
+          },
+          error:function(data) {
+            alert(data.errorMessage);
+          },
+        });
+
+      }
+    }
+    
+    function login() {
+      var username = $("#username").val();
+      var password =$("#password").val();
+      if(username == "" ||password == ""){
+        alert("格式错误")
+      } else{
+        //登录
+        $.ajax({
+          type: 'POST',
+          url: '/userloginservice/login',
+          data:{
+            username:username,
+            password:password,
+          },
+          dataType: 'json',
+          success: function(data){
+            console.log(data)
+            if(data.resultStatus){
+            //   //alert("登陆成功");
+              window.location.href="/";
+            }else{
+              alert(data.errorMessage);
+              window.location.reload();
+            }
+          },
+          error:function(data) {
+            alert(data.errorMessage);
+          },
+        });
+      }
+    }
+
+</script>
+</body>
+</html>
+

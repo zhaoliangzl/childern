@@ -1,0 +1,257 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="../static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="../lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/skin/default/skin.css" id="skin"/>
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/css/style.css"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+
+    <!--_footer 作为公共模版分离出去-->
+    <script type="text/javascript" src="../lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
+    <script type="text/javascript" src="../static/h-ui/js/H-ui.min.js"></script>
+    <script type="text/javascript" src="../static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+    <!--请在下方写此页面业务相关的脚本-->
+    <script type="text/javascript" src="../lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+    <script type="text/javascript" src="../lib/jquery.validation/1.14.0/validate-methods.js"></script>
+    <script type="text/javascript" src="../lib/jquery.validation/1.14.0/messages_zh.js"></script>
+
+    <!--ueditor js-->
+
+    <script>
+        window.UEDITOR_HOME_URL = "/";
+    </script>
+    <title>添加管理员 - 管理员管理 - H-ui.admin v3.1</title>
+    <meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载"/>
+    <meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。"/>
+
+</head>
+<body>
+<article class="page-container">
+    <form class="form form-horizontal" id="form-admin-add">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>标题：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="" placeholder="标题" id="title" name="title"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>轮播图：</label>
+            <div class="col-xs-8 col-sm-9 "
+                 style="">
+                <input class="btn btn-primary radius" type="file" onclick="" id="file2"/>
+                <button onClick="addImg2();" class="btn btn-primary radius" type="button">&nbsp;&nbsp;确认上传&nbsp;&nbsp;</button>
+            </div>
+        </div>
+        <div class="row cl" id="piccon" style="display: none">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>轮播图：</label>
+            <div class="formControls col-xs-8 col-sm-9" id="p">
+
+            </div>
+        </div>
+
+        <!--<div class="row cl" id="piccon" style="display: none">-->
+            <!--<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>头像：</label>-->
+            <!--<div class="formControls col-xs-8 col-sm-9">-->
+                <!--<img src="" id="pic" style="width: 200px;height: 200px;">-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开启/关闭：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input name="enable" value="1" type="radio" id="sex-1" checked="checked"/>
+                    <label for="sex-1">开启</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" value="2" id="sex-2" name="enable"/>
+                    <label for="sex-2"value="2" >关闭 </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
+            </div>
+        </div>
+    </form>
+</article>
+
+
+<script th:inline="javascript">
+
+
+</script>
+
+
+<script type="text/javascript">
+    var banners = "";
+    $(function () {
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+        $("#form-admin-add").validate({
+            rules: {
+                title: {
+                    required: true,
+                    minlength: 0,
+                    maxlength: 16
+                }
+            },
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function (form) {
+
+                $(form).ajaxSubmit({
+                    type: 'post',
+                    url: "/adbannersservice/add",
+                    data:{
+                        content:banners,
+                    },
+                    success: function (data) {
+
+                        if(data.errorCode == 200){
+                            layer.msg('添加成功!', {icon: 1, time: 1000});
+                            setTimeout(function () {
+
+                                window.parent.location.reload();
+
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(index);
+                            },500)
+
+                        }else{
+
+                            layer.errorMessage(data.msg, {icon:2, time: 1000});
+
+                        }
+
+                        //页面关闭，父页面刷新
+                    },
+                    error: function (XmlHttpRequest, textStatus, errorThrown) {
+                        layer.msg('error!', {icon: 1, time: 1000});
+                    }
+                });
+
+                return false;
+
+                var index = parent.layer.getFrameIndex(window.name);
+                console.log(index);
+
+                //parent.$('.btn-refresh').click();
+                parent.layer.close(index);
+
+
+
+
+            }
+        });
+    });
+
+    function addImg2() {
+
+        layer.confirm('你确定要上传所选的文件吗？', function (index) {
+
+            layer.closeAll('dialog');
+
+            var formData = new FormData();
+            formData.append("myfile", document.getElementById("file2").files[0]);
+            $.ajax({
+                url: "/common/upload",
+                type: "POST",
+                data: formData,
+                async: false,
+                /**
+                 *必须false才会自动加上正确的Content-Type
+                 */
+                contentType: false,
+
+                /**
+                 * 必须false才会避开jQuery对 formdata 的默认处理
+                 * XMLHttpRequest会对 formdata 进行正确的处理
+                 */
+                dataType: 'JSON',
+                processData: false,
+                beforeSend: function () {
+                    //异步请求时spinner出现
+                    $("#piccon").css("display","block");
+
+                    var target = $("#main").get(0);
+                    // spinner.spin(target);
+                },
+                success: function (data) {
+                    console.log(data)
+                    if (data.resultStatus) {
+                        layer.msg('上传成功!', {icon: 1, time: 1000});
+                        dirUrl = data.resultData;
+
+                        var piccon = $(".piccon");
+                        var p = $("#p");
+
+                        if(p.children().length<1){
+                            p.show();
+                        }
+                        p.empty();
+                        var html = '';
+                        html +='<span style="width: 200px;height: 200px;">';
+                        html +='<img src="'+dirUrl+'" class="pic" style="width: 200px;height: 200px;">';
+                        html +='<i class="Hui-iconfont" style="position: relative;top:-64px;left: -39px;font-size: 45px;" onclick="delImg(this)">&#xe6e2;</i>';
+                        html +='</span>';
+                        p.append(html);
+                        banners=dirUrl;
+                    }else{
+                        layer.msg('上传失败!', {icon: 2, time: 1000});
+                    }
+                },
+                error: function () {
+                    console.log("上传失败！");
+                    layer.msg('上传失败!', {icon: 2, time: 1000});
+
+                }
+            });
+
+        })
+    }
+    function  delImg(e) {
+        layer.confirm('你确定要上传所选的文件吗？', function (index) {
+            layer.closeAll('dialog');
+            console.log(banners)
+            banners = "";
+            // for (var i = 0; i < banners.length; i++) {
+            //     console.log( $(e).parent());
+            //
+            //     if(banners[i] == $(e).parent().find("img")[0].src){
+            //         console.log(banners[i] +"==="+  $(e).parent().find("img")[0].src)
+            //         banners.remove(banners[i])
+            //         break;
+            //     }
+            // }
+
+            $(e).parent().children(this).remove();
+        })
+    }
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

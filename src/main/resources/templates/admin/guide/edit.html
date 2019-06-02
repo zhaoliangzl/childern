@@ -1,0 +1,325 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="../static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="../lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/skin/default/skin.css" id="skin"/>
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/css/style.css"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+
+    <!--_footer 作为公共模版分离出去-->
+    <script type="text/javascript" src="../lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
+    <script type="text/javascript" src="../static/h-ui/js/H-ui.min.js"></script>
+    <script type="text/javascript" src="../static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+    <!--请在下方写此页面业务相关的脚本-->
+    <script type="text/javascript" src="../lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+    <script type="text/javascript" src="../lib/jquery.validation/1.14.0/validate-methods.js"></script>
+    <script type="text/javascript" src="../lib/jquery.validation/1.14.0/messages_zh.js"></script>
+
+    <!--ueditor js-->
+    <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/ueditor/ueditor.all.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script>
+        window.UEDITOR_HOME_URL = "/";
+    </script>
+    <title>添加管理员 - 管理员管理 - H-ui.admin v3.1</title>
+    <meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载"/>
+    <meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。"/>
+    <script th:inline="javascript">
+        var des = [[${guide.description}]];
+    </script>
+</head>
+<body>
+<article class="page-container">
+    <form class="form form-horizontal" id="form-admin-add">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>登陆账号：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" th:value="${guide.username}" placeholder="登陆账号" id="username" name="username"/>
+                <input type="hidden" name="id" th:value="${guide.id}"/>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>姓名：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" th:value="${guide.name}" placeholder="姓名" id="name" name="name"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>初始密码：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="password" class="input-text" autocomplete="off" th:value="${guide.password}" placeholder="密码" id="password"
+                       name="password"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>确认密码：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="password" class="input-text" autocomplete="off" placeholder="确认新密码" id="password2" th:value="${guide.password}"
+                       name="password2"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>文件名：</label>
+            <div class="col-xs-8 col-sm-9 "
+                 >
+                <input class="btn btn-primary radius" type="file" onclick="" id="file2"/>
+                <button onClick="addImg2();" class="btn btn-primary radius" type="button">&nbsp;&nbsp;确认上传&nbsp;&nbsp;</button>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>图片链接：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" th:value="${guide.header}" placeholder="图片链接" id="header" name="header"/>
+            </div>
+        </div>
+        <div class="row cl" id="piccon" >
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>头像：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <img th:src="${guide.header}" id="pic" style="width: 200px;height: 200px;">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>性别：</label>
+            <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+                <div class="radio-box">
+                    <input name="sex" value="男" type="radio" id="sex-1" checked="checked" />
+                    <label for="sex-1">男</label>
+                </div>
+                <div class="radio-box">
+                    <input type="radio" value="女" id="sex-2" name="sex"/>
+                    <label for="sex-2"value="女" >女</label>
+                </div>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>联系电话：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" th:value="${guide.phone}" placeholder="" id="phone" name="phone"/>
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>简要描述：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" th:value="${guide.brief}" placeholder="请输入导游简要的描述" id="brief" name="brief"/>
+            </div>
+        </div>
+
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>详细描述：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <textarea id="container" class="content"></textarea>
+                <script type="text/javascript">
+                    $(function () {
+                        var ue = UE.getEditor('container');
+                        ue.ready(
+                            function () {
+
+                                ue.setHeight(500);
+                                ue.setContent(des);
+                                //ue.setWidth("100%");
+                            }
+                        );
+                        UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
+                        console.log(UE.Editor.prototype._bkGetActionUrl)
+                        UE.Editor.prototype.getActionUrl = function(action) {
+                            if (action == 'uploadimage' || action == 'uploadscrawl' || action == 'uploadimage') {
+                                return '/imgUpdate'; //在这里返回我们实际的上传图片地址
+                            } else {
+                                console.log(this._bkGetActionUrl.call(this, action));
+                                return this._bkGetActionUrl.call(this, action);
+                            }
+                        }
+                    })
+
+                </script>
+            </div>
+        </div>
+
+
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
+            </div>
+        </div>
+    </form>
+</article>
+
+
+<script th:inline="javascript">
+
+
+</script>
+
+
+<script type="text/javascript">
+    $(function () {
+        $('.skin-minimal input').iCheck({
+            checkboxClass: 'icheckbox-blue',
+            radioClass: 'iradio-blue',
+            increaseArea: '20%'
+        });
+
+        $("#form-admin-add").validate({
+            rules: {
+                username: {
+                    required: true,
+                    minlength: 4,
+                    maxlength: 16
+                },
+                password: {
+                    required: true,
+                },
+                password2: {
+                    required: true,
+                    equalTo: "#password"
+                },
+                sex: {
+                    required: true,
+                },
+                phone: {
+                    required: true,
+                    isPhone: true,
+                },
+                name:{
+                    required: true
+                },
+                header:{
+                    required: true
+                },
+                brief:{
+                    required:true
+                }
+            },
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function (form) {
+
+                $(form).ajaxSubmit({
+                    type: 'post',
+                    url: "/adguideservice/update",
+                    data:{
+                        description:UE.getEditor('container').getContent()
+                    },
+                    success: function (data) {
+
+                        if(data.errorCode == 200){
+                            layer.msg('修改成功!', {icon: 1, time: 1000});
+                            setTimeout(function () {
+
+                                window.parent.location.reload();
+
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(index);
+                            },500)
+
+                        }else{
+
+                            layer.msg(data.errorMessage, {icon:2, time: 1000});
+
+                        }
+
+                        //页面关闭，父页面刷新
+                    },
+                    error: function (XmlHttpRequest, textStatus, errorThrown) {
+                        layer.msg('error!', {icon: 1, time: 1000});
+                    }
+                });
+
+                return false;
+
+                var index = parent.layer.getFrameIndex(window.name);
+                console.log(index);
+
+                //parent.$('.btn-refresh').click();
+                parent.layer.close(index);
+
+
+
+
+            }
+        });
+    });
+
+    function addImg2() {
+
+        layer.confirm('你确定要上传所选的文件吗？', function (index) {
+
+            layer.closeAll('dialog');
+
+            var formData = new FormData();
+            formData.append("myfile", document.getElementById("file2").files[0]);
+            $.ajax({
+                url: "/common/upload",
+                type: "POST",
+                data: formData,
+                async: false,
+                /**
+                 *必须false才会自动加上正确的Content-Type
+                 */
+                contentType: false,
+
+                /**
+                 * 必须false才会避开jQuery对 formdata 的默认处理
+                 * XMLHttpRequest会对 formdata 进行正确的处理
+                 */
+                dataType: 'JSON',
+                processData: false,
+                beforeSend: function () {
+                    //异步请求时spinner出现
+                    $("#piccon").css("display","block");
+
+                    var target = $("#main").get(0);
+                    // spinner.spin(target);
+                },
+                success: function (data) {
+                    console.log(data)
+                    if (data.resultStatus) {
+                        layer.msg('上传成功!', {icon: 1, time: 1000});
+                        dirUrl = data.resultData;
+                        console.log($("#pic"))
+                        $("#pic")[0].src =  dirUrl;
+                        $("#header").val(dirUrl);
+                    }else{
+                        layer.msg('上传失败!', {icon: 2, time: 1000});
+                    }
+                    //关闭spinner
+                    // $("#mb").css("display","none");
+                    // spinner.spin();
+
+                },
+                error: function () {
+                    console.log("上传失败！");
+                    //$("#imgWait").hide();
+                    layer.msg('上传失败!', {icon: 2, time: 1000});
+                    // $("#mb").css("display","none");
+                    //关闭spinner
+                    // spinner.spin();
+                }
+            });
+
+        })
+    }
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+</html>

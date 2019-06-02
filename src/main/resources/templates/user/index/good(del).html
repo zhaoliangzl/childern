@@ -1,0 +1,621 @@
+﻿<!DOCTYPE html>
+<html dir="ltr" lang="en-US" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<!-- Document Meta
+    ============================================= -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--IE Compatibility Meta-->
+<meta name="author" content="zytheme" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="construction html5 template">
+<link href="assets/images/favicon/favicon.ico" rel="icon">
+
+<!-- Fonts
+    ============================================= -->
+<link href='../cssf/0d05e8074e3347fcba02055a30c23cde.css' rel='stylesheet' type='text/css'>
+
+<!-- Stylesheets
+    ============================================= -->
+<link href="../cssf/external.css" rel="stylesheet">
+<link href="../cssf/bootstrap.min.css" rel="stylesheet">
+<link href="../cssf/style.css" rel="stylesheet">
+
+<style>
+	.panel-body img{
+		width: 100%;
+	}
+
+</style>
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+<!--[if lt IE 9]>
+      <script src="../jsf/html5shiv.js"></script>
+      <script src="../jsf/respond.min.js"></script>
+    <![endif]-->
+
+<!-- Document Title
+    ============================================= -->
+<title>Autoshop | E-commerce Html5 Template</title>
+	<script th:inline="javascript">
+		var begin_time = [[${good.beginTime}]];
+		var end_time = [[${good.endTime}]];
+		var id = [[${good.id}]];
+	</script>
+</head>
+<body>
+
+
+<!-- Document Wrapper
+	============================================= -->
+<div id="wrapper" class="wrapper clearfix">
+	<header id="navbar-spy" class="header header-1">
+
+		<!-- .top-bar end -->
+		<nav id="primary-menu" class="navbar navbar-fixed-top">
+			<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="logo" href="/">
+						<img src="picture/logo-light.png" alt="Autoshop">
+					</a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse pull-right" id="header-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-left">
+						<li >
+							<a href="/" >首页</a>
+						</li>
+						<!-- li end -->
+						<li class=" active">
+							<a href="/goods">旅游产品</a>
+						</li>
+						<li>
+							<a href="/lines">旅游路线</a>
+						</li>
+						<li>
+							<a href="/guides">导游团队</a>
+						</li>
+						<li>
+							<a href="/about">关于我们</a>
+						</li>
+						<li>
+							<a th:if="${user ==0 }" href="/userlogin/login">登陆/注册</a>
+							<a th:if="${user ==1 }" href="/login">欢迎您</a>
+						</li>
+					</ul>
+
+					<!-- Mod-->
+					<!--<div class="module module-search pull-left">-->
+					<!--<div class="search-icon">-->
+					<!--<i class="fa fa-search"></i>-->
+					<!--<span class="title">search</span>-->
+					<!--</div>-->
+					<!--<div class="search-box">-->
+					<!--<form class="search-form">-->
+					<!--<div class="input-group">-->
+					<!--<input type="text" class="form-control" placeholder="Type Your Search Words">-->
+					<!--<span class="input-group-btn">-->
+					<!--<button class="btn" type="button"><i class="fa fa-search"></i></button>-->
+					<!--</span>-->
+					<!--</div>-->
+					<!--&lt;!&ndash; /input-group &ndash;&gt;-->
+					<!--</form>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--&lt;!&ndash; .module-search&ndash;&gt;-->
+					<!--&lt;!&ndash; .module-cart &ndash;&gt;-->
+					<!--<div class="module module-cart pull-left">-->
+					<!--<div class="cart-icon">-->
+					<!--<i class="fa fa-shopping-cart"></i>-->
+					<!--<span class="title">shop cart</span>-->
+					<!--<span class="cart-label">2</span>-->
+					<!--</div>-->
+					<!--<div class="cart-box">-->
+					<!--<div class="cart-overview">-->
+					<!--<ul class="list-unstyled">-->
+					<!--<li>-->
+					<!--<img class="img-responsive" src="picture/1.jpg" alt="product"/>-->
+					<!--<div class="product-meta">-->
+					<!--<h5 class="product-title">Belt Car Engine</h5>-->
+					<!--<p class="product-price">Price: $68.00 </p>-->
+					<!--<p class="product-quantity">Quantity: 2</p>-->
+					<!--</div>-->
+					<!--<a class="cancel" href="#">cancel</a>-->
+					<!--</li>-->
+					<!--<li>-->
+					<!--<img class="img-responsive" src="picture/2.jpg" alt="product"/>-->
+					<!--<div class="product-meta">-->
+					<!--<h5 class="product-title">OIL FILTER</h5>-->
+					<!--<p class="product-price">Price: $180.00 </p>-->
+					<!--<p class="product-quantity">Quantity: 1</p>-->
+					<!--</div>-->
+					<!--<a class="cancel" href="#">cancel</a>-->
+					<!--</li>-->
+					<!--</ul>-->
+					<!--</div>-->
+					<!--<div class="cart-total">-->
+					<!--<div class="total-desc">-->
+					<!--<h5>CART SUBTOTAL :</h5>-->
+					<!--</div>-->
+					<!--<div class="total-price">-->
+					<!--<h5>$316.00</h5>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--<div class="clearfix">-->
+					<!--</div>-->
+					<!--<div class="cart-control">-->
+					<!--<a class="btn btn-primary btn-block" href="#">view cart</a>-->
+					<!--<a class="btn btn-secondary btn-block" href="#">check out</a>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!-- .module-cart end -->
+
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container-fluid -->
+		</nav>
+	</header>
+	
+	<!-- Page Title
+============================================= -->
+	<section id="page-title" class="page-title">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-6">
+					<h1 >旅游产品详情</h1>
+				</div>
+				<!-- .col-md-6 end -->
+				<!-- .col-md-6 end -->
+			</div>
+			<!-- .row end -->
+		</div>
+		<!-- .container end -->
+	</section>
+	<!-- #page-title end -->
+	
+	<!-- Featured #1
+============================================= -->
+	<section id="featured1" class="featured featured-1" style="padding-top: 38px;">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-6" style="width: 100%">
+					<!-- .heading end -->
+					<div class="about-accordion" style="width: 100%;">
+						<div class="panel-group accordion" id="accordion02" role="tablist" aria-multiselectable="true">
+							
+							<!-- Panel 01 -->
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="headingOne">
+									<h4 class="panel-title">
+										<a class="accordion-toggle" role="button" data-toggle="collapse" data-parent="#accordion02" href="#collapse02-1" aria-expanded="true" aria-controls="collapse02-1">产品简介</a>
+										<span class="icon"></span>
+									</h4>
+								</div>
+								<div id="collapse02-1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false">
+									<div class="panel-body">
+										<div class="pull-left pr-30">
+											<img th:src="${good.banners}" style="width: 100%" alt="about">
+										</div>
+										<div th:text="${good.name}" style="text-align: center;"></div>
+									</div>
+								</div>
+							</div>
+							
+							<!-- Panel 02 -->
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="headingTwo">
+									<h4 class="panel-title">
+										<a class="accordion-toggle collapsed" role="button" data-toggle="collapse" data-parent="#accordion02" href="#collapse02-2" aria-expanded="false" aria-controls="collapse02-2">路线安排</a>
+									</h4>
+								</div>
+								<div id="collapse02-2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false">
+									<div class="panel-body" th:text="${line.line}"> </div>
+									<div class="panel-body" th:utext="${line.description}"> </div>
+								</div>
+							</div>
+							
+							<!-- Panel 03 -->
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="headingThree">
+									<h4 class="panel-title">
+										<a class="accordion-toggle collapsed" role="button" data-toggle="collapse" data-parent="#accordion02" href="#collapse02-3" aria-expanded="false" aria-controls="collapse02-3">导游介绍</a>
+									</h4>
+								</div>
+								<div id="collapse02-3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="true">
+									<div class="panel-body">
+
+										<div class="row">
+											<!-- Member #1 -->
+
+											<div class="col-xs-12 col-sm-6 col-md-3" th:each="guide,iterStat:${guides}">
+												<div class="member">
+													<div class="member-img">
+														<img th:src="${guide.header}" alt="member" style="width:250px;height: 250px;"/>
+														<div class="member-hover">
+															<p >&nbsp;</p>
+														</div>
+														<!-- .member-hover end -->
+													</div>
+													<!-- .member-img end -->
+													<div class="member-info">
+														<h5 th:text="${guide.name}" style="text-align: center"></h5>
+
+													</div>
+													<!-- .memebr-info end -->
+												</div>
+												<!-- .member end -->
+											</div>
+
+
+										</div>
+										<!-- .row end -->
+									</div>
+								</div>
+							</div>
+							
+							<!-- Panel 04 -->
+							<div class="panel panel-default">
+								<div class="panel-heading" role="tab" id="headingFour">
+									<h4 class="panel-title">
+										<a class="accordion-toggle collapsed" role="button" data-toggle="collapse" data-parent="#accordion02" href="#collapse02-4" aria-expanded="false" aria-controls="collapse02-4">产品详情</a>
+									</h4>
+								</div>
+								<div id="collapse02-4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="true">
+									<div class="panel-body" th:utext="${good.description}"></div>
+								</div>
+							</div>
+						</div>
+						<!-- .accordion end -->
+					</div>
+					<!-- .about-accordion end -->
+				</div>
+				<!-- .col-md-6 end -->
+				<div class="col-xs-12 col-sm-12 col-md-6" style="width: 100%;margin-top: 50px;">
+					<div class="heading">
+						<p class="subheading">服务内容</p>
+						<h2>旅游产品服务内容</h2>
+					</div>
+					<!-- .heading end -->
+					<div class="row">
+						<div class="col-xs-12 col-sm-6 col-md-6">
+							<div class="feature-panel">
+								<div class="feature-icon">
+									<img src="/images/order.png" style="height: 100px;"/>
+								</div>
+								<h4 class="text-uppercase">提前预约</h4>
+								<p>提前预约，您可以很方便的计划您的旅行计划。</p>
+							</div>
+						</div>
+						<!-- .col-md-6 end -->
+						<div class="col-xs-12 col-sm-6 col-md-6">
+							<div class="feature-panel">
+								<div class="feature-icon">
+									<img src="/images/childrenbao.png" style="height: 100px;"/>
+								</div>
+								<h4 class="text-uppercase">专用儿童险</h4>
+								<p>专门针对儿童的保险，保护您的宝宝，一路顺风。</p>
+							</div>
+						</div>
+						<!-- .col-md-6 end -->
+						<div class="col-xs-12 col-sm-6 col-md-6">
+							<div class="feature-panel mb-0">
+								<div class="feature-icon">
+									<img src="/images/peoplebao.png" style="width: 100px;"/>
+								</div>
+								<h4 class="text-uppercase">成人险</h4>
+								<p>成人险将家长的安全也做到了呵护。</p>
+							</div>
+						</div>
+						<!-- .col-md-6 end -->
+						<div class="col-xs-12 col-sm-6 col-md-6" onclick="order()">
+							<div class="feature-panel mb-0">
+								<div class="feature-icon">
+									<img src="/images/buy.png" style="width: 100px;"/>
+								</div>
+								<h4 class="text-uppercase">立即预约</h4>
+								<p>
+									点击进行预约
+									&nbsp;<span th:text="'开始预约时间：'+${good.beginTime}"></span>
+									&nbsp;<span th:text="'结束预约时间：'+${good.endTime}"></span>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- .col-md-6 end -->
+			</div>
+			<!-- .row end -->
+		</div>
+		<!-- .container end -->
+	</section>
+	<!-- #featured1 end -->
+
+	<!-- Footer #1
+============================================= -->
+	<footer id="footer" class="footer footer-1">
+		<!-- Footer Info
+	============================================= -->
+		<div class="footer-info">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 col-md-3">
+						<div class="panel-info">
+							<div class="info-icon">
+								<i class="icon icon-Truck"></i>
+							</div>
+							<div class="info-content">
+								<h4>Free Shipping</h4>
+								<p>Lorem ipsum dolor siamet, adipiscing condimen tristique vel.</p>
+							</div>
+						</div>
+					</div>
+					<!-- .col-md-3 end -->
+					
+					<div class="col-xs-12 col-sm-6 col-md-3">
+						<div class="panel-info">
+							<div class="info-icon">
+								<i class="icon icon-Dollars"></i>
+							</div>
+							<div class="info-content">
+								<h4>Fair Prices</h4>
+								<p>Lorem ipsum dolor siamet, adipiscing condimen tristique vel.</p>
+							</div>
+						</div>
+					</div>
+					<!-- .col-md-3 end -->
+					
+					<div class="col-xs-12 col-sm-6 col-md-3">
+						<div class="panel-info">
+							<div class="info-icon">
+								<i class="icon icon-Shield"></i>
+							</div>
+							<div class="info-content">
+								<h4>Secure Shopping</h4>
+								<p>Lorem ipsum dolor siamet, adipiscing condimen tristique vel.</p>
+							</div>
+						</div>
+					</div>
+					<!-- .col-md-3 end -->
+					
+					<div class="col-xs-12 col-sm-6 col-md-3">
+						<div class="panel-info">
+							<div class="info-icon">
+								<i class="icon icon-Headset"></i>
+							</div>
+							<div class="info-content">
+								<h4>Customer Support</h4>
+								<p>Lorem ipsum dolor siamet, adipiscing condimen tristique vel.</p>
+							</div>
+						</div>
+					</div>
+					<!-- .col-md-3 end -->
+				</div>
+			</div>
+			<!-- .container end -->
+		</div>
+		<!-- .footer-info end -->
+		
+		<!-- Footer Widget
+	============================================= -->
+		<div class="footer-widget">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-4 footer-widget-about">
+						<div class="footer-widget-title">
+							<h5>About Us</h5>
+						</div>
+						<div class="footer-widget-content">
+							<p>Lorem ipsum dolor sit amet, adipiscing condimentum tristique vel, eleifend sed turpis. Amet, consectetur adipising elit Integer.</p>
+							<div class="footer-social">
+								<a class="share-facebook" href="#"><i class="fa fa-facebook"></i></a>
+								<a class="share-google-plus" href="#"><i class="fa fa-google-plus"></i></a>
+								<a class="share-twitter" href="#"><i class="fa fa-twitter"></i></a>
+								<a class="share-pinterest" href="#"><i class="fa fa-pinterest"></i></a>
+								<a class="share-vimeo" href="#"><i class="fa fa-vimeo"></i></a>
+								<a class="share-rss" href="#"><i class="fa fa-rss"></i></a>
+							</div>
+						</div>
+					</div>
+					<!-- .col-md-4 end -->
+					
+					<div class="col-xs-12 col-sm-6 col-md-2 footer-widget-link">
+						<div class="footer-widget-title">
+							<h5>My Account</h5>
+						</div>
+						<div class="footer-widget-content">
+							<ul class="list-unstyled">
+								<li>
+									<a href="#">My Account</a>
+								</li>
+								<li>
+									<a href="#">Order History</a>
+								</li>
+								<li>
+									<a href="#">Wish List</a>
+								</li>
+								<li>
+									<a href="#">Newsletter</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<!-- .col-md-2 end -->
+					
+					<div class="col-xs-12 col-sm-6 col-md-2 footer-widget-link">
+						<div class="footer-widget-title">
+							<h5>Information</h5>
+						</div>
+						<div class="footer-widget-content">
+							<ul class="list-unstyled">
+								<li>
+									<a href="#">About Us</a>
+								</li>
+								<li>
+									<a href="#">Delivery Information</a>
+								</li>
+								<li>
+									<a href="#">Privacy Policy</a>
+								</li>
+								<li>
+									<a href="#">Terms & Conditions</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<!-- .col-md-2 end -->
+					
+					<div class="col-xs-12 col-sm-6 col-md-2 footer-widget-link">
+						<div class="footer-widget-title">
+							<h5>Customer Service</h5>
+						</div>
+						<div class="footer-widget-content">
+							<ul class="list-unstyled">
+								<li>
+									<a href="#">Contact Us</a>
+								</li>
+								<li>
+									<a href="#">Returns</a>
+								</li>
+								<li>
+									<a href="#">Site Map</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<!-- .col-md-2 end -->
+					
+					<div class="col-xs-12 col-sm-6 col-md-2 footer-widget-link">
+						<div class="footer-widget-title">
+							<h5>Extras</h5>
+						</div>
+						<div class="footer-widget-content">
+							<ul class="list-unstyled">
+								<li>
+									<a href="#">Brands</a>
+								</li>
+								<li>
+									<a href="#">Gift Vouchers</a>
+								</li>
+								<li>
+									<a href="#">Affiliates</a>
+								</li>
+								<li>
+									<a href="#">Specials</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<!-- .col-md-2 end -->
+				</div>
+			</div>
+			<!-- .container end -->
+		</div>
+		<!-- .footer-widget end -->
+		
+		<!-- Footer Bar
+	============================================= -->
+		<div class="footer-bar">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<div class="powered">
+							<p>Car Shop &copy; All Rights Reserved. With Made With Love By
+								<a href="http://themeforest.net/user/7oroof/portfolio?ref=7oroof">7oroof.com</a>
+							</p>
+							<ul class="list-inline mb-0">
+								<li>
+									<a href="#">Privacy Policy</a>
+								</li>
+								<li>
+									<a href="#">Terms of Use</a>
+								</li>
+								<li>
+									<a href="#">Stores</a>
+								</li>
+								<li>
+									<a href="#">About Us</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-6">
+						<div class="payment-methods text-right">
+							<ul class="list-inline mb-0">
+								<li><img src="picture/visa.png" alt="payment"></li>
+								<li><img src="picture/mastercard.png" alt="payment"></li>
+								<li><img src="picture/american-express.png" alt="payment"></li>
+								<li><img src="picture/delta.png" alt="payment"></li>
+								<li><img src="picture/cirrus.png" alt="payment"></li>
+								<li><img src="picture/paypal.png" alt="payment"></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- .container end -->
+		</div>
+		<!-- .footer-copyright end -->
+	</footer>
+</div>
+<!-- #wrapper end -->
+
+<!-- Footer Scripts
+============================================= -->
+<script src="../jsf/jquery-2.2.4.min.js"></script>
+<script src="../jsf/plugins.js"></script>
+<script src="../jsf/functions.js"></script>
+<script>
+	function order() {
+		console.log("预约");
+		//获取当前时间
+		var now = new Date().getTime();
+		//进行比较
+		var before = new Date(begin_time).getTime();
+		var after  = new Date(end_time).getTime();
+
+		console.log(now+","+before+","+after);
+		if(now >= before && now <= after){
+			console.log("进行预约");
+			//检查登陆
+			$.ajax({
+				type: 'get',
+				url: "/userservice/checklogin",
+				data:{
+
+				},
+				success: function (data) {
+
+					if(data.errorCode == 200){
+
+					}else{
+						alert("对不起，请您登陆");
+						window.location.href = "/userlogin/login";
+					}
+
+					//页面关闭，父页面刷新
+				},
+				error: function (XmlHttpRequest, textStatus, errorThrown) {
+
+				}
+			});
+
+
+		}else{
+			alert("不在预约时间");
+		}
+
+	}
+
+
+</script>
+</body>
+</html>

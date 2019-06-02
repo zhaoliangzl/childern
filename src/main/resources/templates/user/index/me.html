@@ -1,0 +1,337 @@
+<html dir="ltr" lang="en-US" xmlns:th="http://www.w3.org/1999/xhtml">
+        <head>
+            <!-- Document Meta
+                ============================================= -->
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <!--IE Compatibility Meta-->
+            <meta name="author" content="zytheme" />
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+            <meta name="description" content="construction html5 template">
+            <!-- Fonts
+                ============================================= -->
+            <link href='cssf/0d05e8074e3347fcba02055a30c23cde.css' rel='stylesheet' type='text/css'>
+
+            <!-- Stylesheets
+                ============================================= -->
+            <link href="cssf/external.css" rel="stylesheet">
+            <link href="cssf/bootstrap.min.css" rel="stylesheet">
+            <link href="cssf/style.css" rel="stylesheet">
+
+
+            <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+            <!--[if lt IE 9]>
+            <script src="jsf/html5shiv.js"></script>
+            <script src="jsf/respond.min.js"></script>
+            <![endif]-->
+
+            <!-- Document Title
+                ============================================= -->
+            <title>个人中心-儿童旅行社网站-毕业设计</title>
+        </head>
+<body>
+
+
+
+
+<!-- Document Wrapper
+	============================================= -->
+<div id="wrapper" class="wrapper clearfix">
+    <header id="navbar-spy" class="header header-1" th:include="user/index/index::copyheader">
+    </header>
+
+    <!-- Page Title
+============================================= -->
+    <section id="page-title" class="page-title">
+        <input type="hidden" th:value="${user_id}" id="uid"/>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <h1>个人中心</h1>
+                </div>
+            </div>
+            <!-- .row end -->
+        </div>
+        <!-- .container end -->
+    </section>
+    <!-- #page-title end -->
+
+    <!-- Shop Single left sidebar
+============================================= -->
+    <section id="shopgrid" class="shop shop-single">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-3 sidebar">
+                    <!-- Categories
+============================================= -->
+                    <div class="widget widget-categories">
+                        <div class="widget-title">
+                            <h5>订单分类</h5>
+                        </div>
+                        <div class="widget-content">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a onclick="getIngList(1)" href="javascript:void (0)"><i class="fa fa-angle-double-right"></i>待确认订单<span><span th:text="'('+${num1}+')'"></span></span></a>
+                                </li>
+                                <li>
+                                    <a onclick="getIngList(2)" href="javascript:void (0)"><i class="fa fa-angle-double-right"></i>待出发订单<span><span th:text="'('+${num2}+')'"></span></span></a>
+                                </li>
+                                <li>
+                                    <a onclick="getIngList(3)" href="javascript:void (0)"><i class="fa fa-angle-double-right"></i>待评论订单<span><span th:text="'('+${num3}+')'"></span></span></a>
+                                </li>
+                                <li>
+                                    <a onclick="getIngList(4)" href="javascript:void (0)"><i class="fa fa-angle-double-right"></i>已评价订单<span><span th:text="'('+${num4}+')'"></span></span></a>
+                                </li>
+                                <li>
+                                    <a onclick="getIngList(5)" href="javascript:void (0)"><i class="fa fa-angle-double-right"></i>已取消订单<span><span th:text="'('+${num5}+')'"></span></span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- .widget-categories end -->
+
+                    <!-- Recent Products
+============================================= -->
+                    <!--<div class="widget widget-recent-products">-->
+                        <!--<div class="widget-title">-->
+                            <!--<h5>常用联系人</h5>-->
+                        <!--</div>-->
+                        <!--<div class="widget-content">-->
+                            <!--&lt;!&ndash; Product #1 &ndash;&gt;-->
+                            <!--<div class="product">-->
+                                <!--<img src="picture/contact.jpg" alt="product" style="width: 60px;"/>-->
+                                <!--<div class="product-desc">-->
+                                    <!--<div class="product-meta">-->
+                                        <!--<span class="color-theme">联系人管理</span>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash; .recent-product end &ndash;&gt;-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash; .widget-content end &ndash;&gt;-->
+                    <!--</div>-->
+                    <!-- .widget-recent-product end -->
+                </div>
+                <!-- .col-md-3 end -->
+                <div class="col-xs-12 col-sm-12 col-md-9 shop-content">
+                    <!-- Alert Message -->
+                    <span id="list">
+
+
+                    <div class="alert">
+                        <div class="alert-icon">
+                            <img style="width: 50px;" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1556024751995&di=514df23344017797086a47bc362bf040&imgtype=0&src=http%3A%2F%2Fimg.aso.aizhan.com%2Ficon%2Fff%2Fe9%2F5f%2Fffe95f280e36d9023c733c546bf1d1b0.jpg"/>
+                        </div>
+                        <div class="alert-content">
+                            <h4>订单编号：</h4>
+                            <h4>产品名称：</h4>
+                            <p>出发时间：</p>
+                            <span>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>出行人员信息:</th>
+                                        </tr>
+                                        <tr >
+                                            <th width="150">姓名</th>
+                                            <th width="150">年龄</th>
+                                            <th width="150">人员类型</th>
+                                            <th width="150">联系方式</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                            <th >123123213</th>
+                                            <th >年1312312龄</th>
+                                            <th >人312312员类型</th>
+                                            <th >联3123系方式</th>
+                                    </tbody>
+                                </table>
+
+                            </span>
+                        </div>
+                    </div>
+                    </span>
+
+                </div>
+                <!-- .shop-content end -->
+            </div>
+            <!-- .row end -->
+        </div>
+        <!-- .container end -->
+    </section>
+    <!-- #blog end -->
+
+    <!-- Footer #1
+============================================= -->
+    <footer id="footer" class="footer footer-1" th:include="/user/index/index::copyfooter">
+    </footer>
+</div>
+<!-- #wrapper end -->
+
+<!-- Footer Scripts
+============================================= -->
+<script src="jsf/jquery-2.2.4.min.js"></script>
+<script src="jsf/plugins.js"></script>
+<script src="jsf/functions.js"></script>
+<script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="../static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="../static/h-ui.admin/js/H-ui.admin.js"></script>
+<script>
+    $(function () {
+        getIngList(1);
+
+    })
+    
+    
+    //获取订单列表
+    function getIngList(x) {
+
+        /**
+         * 1.在等待
+         * 2.已确认
+         * 3.待评价
+         * 4.已评价
+         * 5.已取消
+         * */
+
+        var url = "";
+        if(x == 1){
+            url = '/order/wait';
+        }
+        if(x==2){
+            url = '/order/confirm';
+        }
+        if(x==3){
+            url = '/order/waitcomment';
+        }
+        if(x==4){
+            url = '/order/finish';
+        }
+        if(x==5){
+            url = '/order/cancel';
+        }
+
+        $.ajax({
+            type: 'get',
+
+            url: url,
+            data:{
+                userid:$("#uid").val()
+            },
+            dataType: 'json',
+            success: function(data){
+                console.log(data);
+                if(data.resultStatus ){
+                    //开始渲染
+                    var list = $("#list");
+                    list.empty();
+                    var html = "";
+                    for (var i = 0; i < data.resultData.length; i++) {
+
+                        html = "";
+                        html +='<div class="alert">';
+                        html +=' <div class="alert-icon">';
+                        html +=' <img style="width: 50px;" src="picture/ding.jpg"/>';
+                        html +='</div>';
+                        html +='<div class="alert-content">';
+                        html +='<h4>订单编号：'+data.resultData[i].order.orderSn+'</h4>';
+                        html +='<h4>产品名称：'+data.resultData[i].order.goodsName+'</h4>';
+                        html +='<p>下单时间：'+data.resultData[i].order.time+'</p>';
+                        html +='<p>出发时间：'+data.resultData[i].order.goTime+'</p>';
+                        if(x == 1){
+                            html +='<a style="float: right;color: blue;cursor:pointer;" onclick="cancel('+data.resultData[i].order.id+')">取消订单</a>';
+                        }else if(x == 3){
+                            html +='<a style="float: right;color: blue;cursor:pointer;" onclick="comment('+data.resultData[i].order.id+')">评价订单</a>';
+                        }
+                        html +='<span>';
+                        html +='<table>';
+                        html +='<thead>';
+                        html +='<tr>';
+                        html +='<th>出行人员信息:</th>';
+                        html +='</tr>';
+                        html +='<tr >';
+                        html +='<th width="150">姓名</th>';
+                        html +='<th width="150">年龄</th>';
+                        html +='<th width="150">人员类型</th>';
+                        html +='<th width="150">联系方式</th>';
+                        html +='</tr>';
+                        html +='</thead>';
+                        html +='<tbody>';
+                        //开始循环
+                        for (var j = 0; j < data.resultData[i].contacts.length; j++) {
+                            html +='<tr>';
+                            html +='<th >'+data.resultData[i].contacts[j].name+'</th>';
+                            html +='<th >'+data.resultData[i].contacts[j].age+'</th>';
+                            //1成人
+                            if(data.resultData[i].contacts[j].type == 2 ){
+                                html +='<th >儿童</th>';
+                            }else{
+                                html +='<th >成人</th>';
+                            }
+
+                            html +='<th >'+data.resultData[i].contacts[j].phone+'</th>';
+                            html +='</tr>';
+                        }
+                        //循环结束
+                        html +='</tbody>';
+                        html +='</table>';
+
+                        list.append(html);
+                    }
+                }else{
+                    layer.msg(data.errorMessage, {icon: 2, time: 1000});
+                }
+            },
+            error:function(data) {
+                layer.msg(data.errorMessage, {icon: 2, time: 1000});
+            },
+        });
+        
+    }
+
+    function cancel(id) {
+        console.log("取消订单"+id)
+
+        $.ajax({
+            type: 'get',
+            url: 'order/cancelorder',
+            data:{
+                id:id,
+            },
+            dataType: 'json',
+            success: function(data){
+                if(data.resultStatus ){
+
+                    layer.msg('取消成功!', {icon: 1, time: 1000});
+                    setTimeout(function () {
+                        window.location.reload();
+                    },200)
+
+                }else{
+                    layer.errorMessage(data.msg, {icon:2, time: 1000});
+                }
+            },
+            error:function(data) {
+                layer.errorMessage(data.msg, {icon:2, time: 1000});
+            },
+        });
+
+    }
+    
+    function comment(id) {
+
+        console.log("评价订单"+id);
+
+        layer_show("评价订单","/comment?id="+id,900,600);
+
+    }
+    
+    
+    
+</script>
+
+
+</body>
+</html>
